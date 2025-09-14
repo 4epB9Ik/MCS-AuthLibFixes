@@ -46,13 +46,13 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
     private final PublicKey publicKey;
     private final Gson gson;
     private final LoadingCache<GameProfile, GameProfile> insecureProfiles;
-    private static final String defaultUrl = "https://launcher.mcskill.net/";
+    private static final String defaultUrl = "https://launcher.mcskill.net";
 
     protected YggdrasilMinecraftSessionService(YggdrasilAuthenticationService service, Environment env) {
         super(service);
-        this.joinUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "sessionserver/session/minecraft/join");
-        this.checkUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "sessionserver/session/minecraft/hasJoined");
-        this.profileUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "sessionserver/session/minecraft/profile/");
+        this.joinUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "/sessionserver/session/minecraft/join");
+        this.checkUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "/sessionserver/session/minecraft/hasJoined");
+        this.profileUrl = HttpAuthenticationService.constantURL(getBaseUrl() + "/sessionserver/session/minecraft/profile/");
         this.gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
         this.insecureProfiles = CacheBuilder.newBuilder().expireAfterWrite(6L, TimeUnit.HOURS).build(new CacheLoader<GameProfile, GameProfile>() { // from class: com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.1
             public GameProfile load(GameProfile key) throws Exception {
